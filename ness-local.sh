@@ -115,3 +115,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once ABSPATH . 'wp-settings.php';
 
 " > $NESS_LOCAL_SITES/$SITE_NAME"-test"/$SITE_NAME"-docker"/wp-config.php
+
+echo""
+echo "Copy the below NGinx Configurations to /etc/nginx/sites-available/"$SITE_NAME".conf and enable the site."
+echo ""
+
+echo "
+server {
+    listen 80;
+    server_name "$SITE_NAME".test www."$SITE_NAME".test;
+    root "$NESS_LOCAL_SITES"/"$SITE_NAME"-test/"$SITE_NAME"-docker;
+    index index.html index.htm index.php;
+
+    if (!-e $request_filename) {
+        rewrite /wp-admin$ $scheme://$host$uri/ permanent;
+        rewrite ^(/[^/]+)?(/wp-.*) $2 last;
+        rewrite ^(/[^/]+)?(/.*\.php) $2 last;
+    }
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+     }
+
+    location ~ /\.ht {
+        deny all;
+    }
+
+}"
