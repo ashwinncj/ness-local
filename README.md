@@ -45,3 +45,8 @@ export GITLAB_USER=<your-gitlab-username>
 export GITLAB_TOKEN=<your-personal-access-token>
 ```
 
+## Loading Database
+
+To load the database, imort the respective DB using `airlocal` command
+
+Go to the installation of the ness-local-sites and run the command `wp db import /home/johndoe/.airsnapshots/<site_develop.sql>`
