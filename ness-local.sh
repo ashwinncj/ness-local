@@ -54,6 +54,11 @@ git clone https://$GITLAB_USER:$GITLAB_TOKEN@$GITSOURCE$SITE_NAME"-docker"
 cd $DOCKER_INSTALL_PATH/$SITE_NAME"-docker"
 composer install
 
+## Run NPM Install for bumblebee theme.
+THEME_LOCATION=$DOCKER_INSTALL_PATH/$SITE_NAME"-docker"/web/wp-content/themes
+[ -d $THEME_LOCATION/bumblebee ] && cd $THEME_LOCATION/bumblebee && npm install && npm run gulp
+[ -d $THEME_LOCATION/bumblebee-toh-child ] && cd $THEME_LOCATION/bumblebee-toh-child && npm install && npm run gulp
+
 cd $NESS_LOCAL_SITES
 mkdir $SITE_NAME"-test"
 cd $SITE_NAME"-test"
