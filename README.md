@@ -6,9 +6,12 @@ Local site development and deployment tool.
 ## Prerequisites
 - PHP 7.4
 - LEMP Stack( Nginx, MySQL, PHP )
-- WP CLI
 - Phpmyadmin
+- Composer 1.10.*
+- WP CLI
 - `sudo` privileges
+- PHP extensions( mbstring, php-redis, php-curl, php-zip, php-unzip)
+- NPM config set and registry login
 
 ## Installation
 
@@ -37,7 +40,7 @@ mkdir ness-local-sites
 
 ```
 export DOCKER_INSTALL_PATH=/home/johndoe/docker-repositories
-export NESS_LOCAL_SITES=/home/hohndoe/ness-local-sites
+export NESS_LOCAL_SITES=/home/johndoe/ness-local-sites
 export GITLAB_USER=<your-gitlab-username>
 export GITLAB_TOKEN=<your-personal-access-token>
 ```
