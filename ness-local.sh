@@ -86,6 +86,7 @@ echo "
 require_once 'vendor/autoload.php';
 require_once 'vendor/tmbi/wp-migrations/src/CLI/Command.php';
 require_once 'vendor/tmbi/wp-migrations/src/Database/Migrator.php';
+require_once 'vendor/tmbi/wp-migrations/src/Database/AbstractMigration.php';
 
 define( 'DB_NAME', '"$DB_NAME"' );
 
