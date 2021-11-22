@@ -40,6 +40,9 @@ fi
 
 echo "## Ness Local ##"
 read -p "What is the name of the site? " SITE_NAME
+read -p "Enter Database Name: " DB_NAME
+read -p "Enter Database User: " DB_USER
+read -p "Enter Database Password: " DB_PASSWORD
 
 printf "\nPlease wait while is the site is being created..."
 
@@ -65,8 +68,41 @@ ln $DOCKER_INSTALL_PATH/$SITE_NAME"-docker"/migrations $NESS_LOCAL_SITES/$SITE_N
 ln $DOCKER_INSTALL_PATH/$SITE_NAME"-docker"/vendor $NESS_LOCAL_SITES/$SITE_NAME"-test"/$SITE_NAME"-docker/" -s
 
 ## Edit config file
-sed -i "/define( 'WP_DEBUG'/d" $NESS_LOCAL_SITES/$SITE_NAME"-test"/$SITE_NAME"-docker"/wp-config.php
+# sed -i "/define( 'WP_DEBUG'/d" $NESS_LOCAL_SITES/$SITE_NAME"-test"/$SITE_NAME"-docker"/wp-config.php
+# echo "define( 'WP_DEBUG', true );" >>$NESS_LOCAL_SITES/$SITE_NAME"-test"/$SITE_NAME"-docker"/wp-config.php
 
-echo "define( 'WP_DEBUG', true );" >>$NESS_LOCAL_SITES/$SITE_NAME"-test"/$SITE_NAME"-docker"/wp-config.php
-echo "require_once 'vendor/tmbi/wp-migrations/src/CLI/Command.php';
-require_once 'vendor/tmbi/wp-migrations/src/Database/Migrator.php';" >> $NESS_LOCAL_SITES/$SITE_NAME"-test"/$SITE_NAME"-docker"/wp-config.php
+echo "
+<?php
+
+require_once 'vendor/autoload.php';
+require_once 'vendor/tmbi/wp-migrations/src/CLI/Command.php';
+require_once 'vendor/tmbi/wp-migrations/src/Database/Migrator.php';
+
+define( 'DB_NAME', '"$DB_NAME"' );
+
+/** MySQL database username */
+define( 'DB_USER', '"$DB_USER"' );
+
+/** MySQL database password */
+define( 'DB_PASSWORD', '"$DB_PASSWORD"' );
+
+/** MySQL hostname */
+define( 'DB_HOST', 'localhost' );
+
+/** Database Charset to use in creating database tables. */
+define( 'DB_CHARSET', 'utf8mb4' );
+
+/** The Database Collate type. Don't change this if in doubt. */
+define( 'DB_COLLATE', '' );
+
+\$table_prefix = 'wp_';
+
+/** Absolute path to the WordPress directory. */
+if ( ! defined( 'ABSPATH' ) ) {
+        define( 'ABSPATH', __DIR__ . '/' );
+}
+
+/** Sets up WordPress vars and included files. */
+require_once ABSPATH . 'wp-settings.php';
+
+" > $NESS_LOCAL_SITES/$SITE_NAME"-test"/$SITE_NAME"-docker"/wp-config.php
