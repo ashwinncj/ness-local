@@ -63,9 +63,13 @@ mkdir $SITE_NAME"-docker"
 cd $SITE_NAME"-docker"
 wp core download --version=5.4.2
 
+## Remove wp-content folder.
+rm wp-content -rf
+
 ## Setup links
 ln $DOCKER_INSTALL_PATH/$SITE_NAME"-docker"/migrations $NESS_LOCAL_SITES/$SITE_NAME"-test" -s
 ln $DOCKER_INSTALL_PATH/$SITE_NAME"-docker"/vendor $NESS_LOCAL_SITES/$SITE_NAME"-test"/$SITE_NAME"-docker/" -s
+ln $DOCKER_INSTALL_PATH/$SITE_NAME"-docker"/web/wp-content $NESS_LOCAL_SITES/$SITE_NAME"-test"/$SITE_NAME"-docker/" -s
 
 ## Edit config file
 # sed -i "/define( 'WP_DEBUG'/d" $NESS_LOCAL_SITES/$SITE_NAME"-test"/$SITE_NAME"-docker"/wp-config.php
