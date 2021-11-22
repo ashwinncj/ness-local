@@ -50,3 +50,10 @@ export GITLAB_TOKEN=<your-personal-access-token>
 To load the database, imort the respective DB using `airlocal` command
 
 Go to the installation of the ness-local-sites and run the command `wp db import /home/johndoe/.airsnapshots/<site_develop.sql>`
+
+Update `site_url` and `home` option using `wp option update siteurl bnb.test`
+
+```
+wp option update home http://bnb.test
+wp option update siteurl http://bnb.test
+```
