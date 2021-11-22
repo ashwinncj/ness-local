@@ -118,7 +118,9 @@ require_once ABSPATH . 'wp-settings.php';
 " > $NESS_LOCAL_SITES/$SITE_NAME"-test"/$SITE_NAME"-docker"/wp-config.php
 
 echo""
-echo "Copy the below NGinx Configurations to /etc/nginx/sites-available/"$SITE_NAME".conf and enable the site."
+echo "#######################    IMPORTANT    ###############################"
+echo ""
+echo ": Copy the below Nginx configuration to - /etc/nginx/sites-available/"$SITE_NAME".conf and enable the site."
 echo ""
 
 echo "
