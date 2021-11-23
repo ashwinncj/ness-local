@@ -44,14 +44,40 @@ export NESS_LOCAL_SITES=/home/johndoe/ness-local-sites
 export GITLAB_USER=<your-gitlab-username>
 export GITLAB_TOKEN=<your-personal-access-token>
 ```
+## Creating new local site
 
+### Database
+Create a new database using phpmyadmin which will be used for the site being created. For e.g., `bnb-db`
+
+### Create site
+Use `ness-local` command to create new site.
+```
+$ ness-local
+## Ness Local ##
+What is the name of the site? bnb
+Enter Database Name: bnb-db
+Enter Database User: root
+Enter Database Password: password
+Media Proxy URL: http://stage.birdsandblooms.com
+
+Please wait while is the site is being created...fatal: destination path 'bnb-docker' already exists and is not an empty directory.
+Loading composer repositories with package information
+Installing dependencies (including require-dev) from lock file
+...
+
+```
 ## Loading Database
 
-To load the database, imort the respective DB using `airlocal` command
+* To load the database, import the respective DB using `airlocal` command
 
-Go to the installation of the ness-local-sites and run the command `wp db import /home/johndoe/.airsnapshots/<site_develop.sql>`
+* Go to the installation of the ness-local-sites and run the command `wp db import /home/johndoe/.airsnapshots/<site_develop.sql>`
 
-Update `site_url` and `home` option using `wp option update siteurl bnb.test`
+```
+cd /home/johndoe/ness-local-sites/bnb-test/bnb-docker
+wp db import /home/johndoe/.airsnapshots/bnb_stage.sql
+```
+
+* Update `site_url` and `home` option using `wp option update siteurl bnb.test`
 
 ```
 wp option update home http://bnb.test
