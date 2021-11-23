@@ -122,7 +122,7 @@ require_once ABSPATH . 'wp-settings.php';
 echo""
 echo "#######################    IMPORTANT    ###############################"
 echo ""
-echo ": Copy the below Nginx configuration to - /etc/nginx/sites-available/"$SITE_NAME".conf and enable the site."
+echo "The site needs to be enabled in the Nginx for local development to start serving. Please follow the instructions below."
 echo ""
 
 echo "
@@ -157,4 +157,10 @@ server {
         deny all;
     }
 
-}"
+}" >> $NESS_LOCAL_SITES/$SITE_NAME"-test"/$SITE_NAME".conf"
+
+echo "Execute the below command to enable the site for Nginx."
+echo "sudo ln -s "$NESS_LOCAL_SITES/$SITE_NAME"-test"/$SITE_NAME".conf /etc/nginx/sites-enabled"
+echo "sudo nginx -t"
+echo "sudo service nginx restart"
+
