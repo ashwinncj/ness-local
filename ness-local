@@ -67,7 +67,7 @@ mkdir $SITE_NAME"-docker"
 
 ## Download WP Core.
 cd $SITE_NAME"-docker"
-wp core download --version=5.4.2
+wp core download --version=5.8.3
 
 ## Remove wp-content folder.
 rm wp-content -rf
